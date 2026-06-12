@@ -1,21 +1,36 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
 <body>
     <h1>Blackjack Table</h1>
-    <p>Player Hand: {% for card in player_hand %}{{ card.rank }}{{ card.suit }} {% endfor %} (Score: {{ player_score }})</p>
-    <p>Dealer Hand: 
-        {% if game_over %}
-            {% for card in dealer_hand %}{{ card.rank }}{{ card.suit }} {% endfor %} (Score: {{ dealer_score }})
-        {% else %}
-            {{ dealer_hand[0].rank }}{{ dealer_hand[0].suit }} [Hidden]
-        {% endif %}
-    </p>
+    <div class="hand">
+        <p>Player Hand: 
+            {% for card in player_hand %}
+                <span class="card">{{ card.rank }}{{ card.suit }}</span>
+            {% endfor %} 
+            (Score: {{ player_score }})
+        </p>
+    </div>
+    <div class="hand">
+        <p>Dealer Hand: 
+            {% if game_over %}
+                {% for card in dealer_hand %}
+                    <span class="card">{{ card.rank }}{{ card.suit }}</span>
+                {% endfor %} (Score: {{ dealer_score }})
+            {% else %}
+                <span class="card">{{ dealer_hand[0].rank }}{{ dealer_hand[0].suit }}</span>
+                <span class="card">?</span>
+            {% endif %}
+        </p>
+    </div>
     
     {% if not game_over %}
         <a href="/hit"><button>Hit</button></a>
         <a href="/stand"><button>Stand</button></a>
     {% else %}
-        <p><strong>{{ result }}</strong></p>
+        <p class="result">{{ result }}</p>
         <a href="/"><button>Play Again</button></a>
     {% endif %}
 </body>

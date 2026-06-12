@@ -68,6 +68,9 @@ def game():
 
 @app.route('/hit')
 def hit():
+    if 'player_hand' not in session or session['game_over']:
+        return redirect(url_for('game'))
+    
     session['player_hand'].append(session['deck'].pop())
     score = calculate_score(session['player_hand'])
     if score > 21:
