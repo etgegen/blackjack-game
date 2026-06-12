@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>Blackjack</h1>
+    <p>Balance: ${{ balance }}</p>
+    <form action="/bet" method="POST">
+        <input type="number" name="bet" min="1" max="{{ balance }}" required>
+        <button type="submit">Place Bet</button>
+    </form>
+</body>
+</html>

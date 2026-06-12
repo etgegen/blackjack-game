@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>Blackjack Table</h1>
+    <p>Player Hand: {% for card in player_hand %}{{ card.rank }}{{ card.suit }} {% endfor %} (Score: {{ player_score }})</p>
+    <p>Dealer Hand: 
+        {% if game_over %}
+            {% for card in dealer_hand %}{{ card.rank }}{{ card.suit }} {% endfor %} (Score: {{ dealer_score }})
+        {% else %}
+            {{ dealer_hand[0].rank }}{{ dealer_hand[0].suit }} [Hidden]
+        {% endif %}
+    </p>
+    
+    {% if not game_over %}
+        <a href="/hit"><button>Hit</button></a>
+        <a href="/stand"><button>Stand</button></a>
+    {% else %}
+        <p><strong>{{ result }}</strong></p>
+        <a href="/"><button>Play Again</button></a>
+    {% endif %}
+</body>
+</html>
